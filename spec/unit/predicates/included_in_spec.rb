@@ -11,10 +11,12 @@ RSpec.describe Dry::Logic::Predicates do
         [
           [%w[Jill John], "Jill"],
           [%w[Jill John], "John"],
+          [Set.new(%w[Jill John]), "Jill"],
+          [Set.new(%w[Jill John]), "John"],
           [1..2, 1],
           [1..2, 2],
-          [[nil, false], nil],
-          [[nil, false], false]
+          [Set.new([nil, false]), nil],
+          [Set.new([nil, false]), false]
         ]
       end
 
@@ -25,9 +27,10 @@ RSpec.describe Dry::Logic::Predicates do
       let(:arguments_list) do
         [
           [%w[Jill John], "Jack"],
+          [Set.new(%w[Jill John]), "Jack"],
           [1..2, 0],
           [1..2, 3],
-          [[nil, false], true]
+          [Set.new([nil, false]), true]
         ]
       end
 

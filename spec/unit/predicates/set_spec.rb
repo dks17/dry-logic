@@ -3,28 +3,37 @@
 require "dry/logic/predicates"
 
 RSpec.describe Dry::Logic::Predicates do
-  describe "#date_time?" do
-    let(:predicate_name) { :date_time? }
+  describe "#set?" do
+    let(:predicate_name) { :set? }
 
-    context "when value is a datetime" do
+    context "when value is a set" do
       let(:arguments_list) do
-        [[DateTime.now]]
+        [
+          [Set.new],
+          [Set.new([])],
+          [Set.new(%w[other array])],
+          [Set.new([123, "really", :blah])],
+          [Set.new([nil])],
+          [Set.new([false])],
+          [Set.new([true])]
+        ]
       end
 
       it_behaves_like "a passing predicate"
     end
 
-    context "with value is not an integer" do
+    context "when value is not a set" do
       let(:arguments_list) do
         [
           [""],
           [[]],
           [{}],
-          [Set.new],
           [nil],
           [:symbol],
           [String],
-          [1]
+          [1],
+          [1.0],
+          [true]
         ]
       end
 

@@ -12,7 +12,6 @@ RSpec.describe Dry::Logic::Predicates do
           [[]],
           [%w[other array]],
           [[123, "really", :blah]],
-          [[]],
           [[nil]],
           [[false]],
           [[true]]
@@ -27,13 +26,13 @@ RSpec.describe Dry::Logic::Predicates do
         [
           [""],
           [{}],
+          [Set.new],
           [nil],
           [:symbol],
           [String],
           [1],
           [1.0],
-          [true],
-          [{}]
+          [true]
         ]
       end
 

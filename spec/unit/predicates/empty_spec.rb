@@ -12,6 +12,8 @@ RSpec.describe Dry::Logic::Predicates do
           [""],
           [[]],
           [{}],
+          [Set.new],
+          [Set.new([])],
           [nil]
         ]
       end
@@ -19,12 +21,16 @@ RSpec.describe Dry::Logic::Predicates do
       it_behaves_like "a passing predicate"
     end
 
+    # TODO: добавить больше примеров с сет
     context "with value is not empty" do
       let(:arguments_list) do
         [
           ["Jill"],
           [[1, 2, 3]],
           [{name: "John"}],
+          [Set.new([1])],
+          [Set.new([nil])],
+          [Set.new([{}])],
           [true],
           [false],
           ["1"],

@@ -21,6 +21,7 @@ RSpec.describe Dry::Logic::Predicates do
           [TrueClass, ""],
           [TrueClass, []],
           [TrueClass, {}],
+          [TrueClass, Set.new],
           [TrueClass, nil],
           [TrueClass, :symbol],
           [TrueClass, String],

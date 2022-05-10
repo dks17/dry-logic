@@ -21,6 +21,7 @@ RSpec.describe Dry::Logic::Predicates do
           [:symbol],
           [[]],
           [{}],
+          [Set.new],
           [String]
         ]
       end

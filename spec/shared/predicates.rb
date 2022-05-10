@@ -36,6 +36,8 @@ RSpec.shared_examples "predicates" do
   let(:case?) { Dry::Logic::Predicates[:case?] }
 
   let(:equal?) { Dry::Logic::Predicates[:equal?] }
+
+  let(:set?) { Dry::Logic::Predicates[:set?] }
 end
 
 RSpec.shared_examples "a passing predicate" do
@@ -43,6 +45,7 @@ RSpec.shared_examples "a passing predicate" do
 
   it do
     arguments_list.each do |args|
+      binding.pry
       expect(predicate.call(*args)).to be(true)
     end
   end

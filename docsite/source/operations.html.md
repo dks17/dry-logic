@@ -48,16 +48,18 @@ false | false | false
 
 ``` ruby
 is_empty = build do
-  (attr?(:empty) > empty?) | nil?
+  (attr?(:empty?) > empty?) | nil?
 end
 
 is_empty.call("").success? # => true
 is_empty.call([]).success? # => true
 is_empty.call({}).success? # => true
+is_empty.call(Set.new([])).success? # => true
 is_empty.call(nil).success? # => true
 
 is_empty.call("string").success? # => false
 is_empty.call(["array"]).success? # => false
+is_empty.call(Set.new(["set"])).success? # => false
 is_empty.call({key: "value"}).success? # => false
 ```
 
@@ -130,6 +132,8 @@ end
 
 is_only_odd.call([1, 3, 5]).success? # => true
 is_only_odd.call([4, 6, 8]).success? # => false
+is_only_odd.call(Set.new([1, 3, 5])).success? # => true
+is_only_odd.call(Set.new([4, 6, 8])).success? # => false
 ```
 
 ### Set (`set`)
@@ -157,6 +161,8 @@ end
 
 is_present.call([1]).success? # => true
 is_present.call([]).success? # => false
+is_present.call(Set.new([1])).success? # => true
+is_present.call(Set.new([])).success? # => false
 is_present.call("A").success? # => true
 is_present.call("").success? # => false
 ```
