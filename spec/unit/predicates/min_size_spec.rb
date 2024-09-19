@@ -12,7 +12,8 @@ RSpec.describe Dry::Logic::Predicates do
           [1, [1, 2]],
           [3, "Jill"],
           [1, {1 => "st", 2 => "nd"}],
-          [4, 1..5]
+          [4, 1..5],
+          [1, Set.new([1, 2])]
         ]
       end
 
@@ -25,7 +26,8 @@ RSpec.describe Dry::Logic::Predicates do
           [2, [1, 2]],
           [4, "Jill"],
           [2, {1 => "st", 2 => "nd"}],
-          [5, 1..5]
+          [5, 1..5],
+          [2, Set.new([1, 2])]
         ]
       end
 
@@ -38,7 +40,8 @@ RSpec.describe Dry::Logic::Predicates do
           [3, [1, 2]],
           [5, "Jill"],
           [3, {1 => "st", 2 => "nd"}],
-          [6, 1..5]
+          [6, 1..5],
+          [3, Set.new([1, 2])]
         ]
       end
 

@@ -29,6 +29,9 @@ RSpec.describe Dry::Logic::Predicates do
           ["10,150.00"],
           [nil],
           [:symbol],
+          [[]],
+          [{}],
+          [Set.new],
           [String]
         ]
       end

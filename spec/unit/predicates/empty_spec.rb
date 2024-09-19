@@ -12,6 +12,7 @@ RSpec.describe Dry::Logic::Predicates do
           [""],
           [[]],
           [{}],
+          [Set.new],
           [nil]
         ]
       end
@@ -25,6 +26,7 @@ RSpec.describe Dry::Logic::Predicates do
           ["Jill"],
           [[1, 2, 3]],
           [{name: "John"}],
+          [Set.new([nil])],
           [true],
           [false],
           ["1"],

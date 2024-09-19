@@ -14,12 +14,13 @@ RSpec.describe Dry::Logic::Predicates do
       it_behaves_like "a passing predicate"
     end
 
-    context "with value is not an integer" do
+    context "with value is not a decimal" do
       let(:arguments_list) do
         [
           [""],
           [[]],
           [{}],
+          [Set.new],
           [nil],
           [:symbol],
           [String],

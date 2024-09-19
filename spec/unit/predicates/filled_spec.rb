@@ -12,6 +12,7 @@ RSpec.describe Dry::Logic::Predicates do
           ["Jill"],
           [[1, 2, 3]],
           [{name: "John"}],
+          [Set.new([1, 2, 3])],
           [true],
           [false],
           ["1"],
@@ -30,6 +31,7 @@ RSpec.describe Dry::Logic::Predicates do
           [""],
           [[]],
           [{}],
+          [Set.new],
           [nil]
         ]
       end

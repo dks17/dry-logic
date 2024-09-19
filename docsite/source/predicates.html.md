@@ -111,6 +111,9 @@ has_zeros = build { includes?(0) }
 
 has_zeros.call([0, 1, 2]).success? # => true
 has_zeros.call([-1, -2, -3]).success? # => false
+
+has_zeros.call(Set.new([0, 1, 2])).success? # => true
+has_zeros.call(Set.new([-1, -2, -3])).success? # => false
 ```
 
 ### Excluded values (`excludes?`)
@@ -122,6 +125,9 @@ no_zeroes = build { excludes?(0) }
 
 no_zeroes.call([1,2,3]).success? # => true
 no_zeroes.call([0, -1, -2]).success? # => false
+
+no_zeroes.call(Set.new([1,2,3])).success? # => true
+no_zeroes.call(Set.new([0, -1, -2])).success? # => false
 ```
 
 ### Included in (`included_in?`)
@@ -150,17 +156,19 @@ is_negative.call(1).success? # => false
 
 ### Size (`size?`)
 
-> Can be applied values responding to `#size`, such as `Hash`, `Array`, and `String`
+> Can be applied values responding to `#size`, such as `Hash`, `Array`, `Set` and `String`
 
 ``` ruby
 is_empty = build { size?(0) }
 
 is_empty.call({}).success? # => true
 is_empty.call([]).success? # => true
+is_empty.call(Set.new).success? # => true
 is_empty.call("").success? # => true
 
 is_empty.call({"1" => 2}).success? # => false
 is_empty.call([1]).success? # => false
+is_empty.call(Set.new([1])).success? # => false
 is_empty.call("1").success? # => false
 ```
 
@@ -173,10 +181,12 @@ is_present = build { min_size?(1) }
 
 is_present.call({"1" => 2}).success? # => true
 is_present.call([1]).success? # => true
+is_present.call(Set.new([1])).success? # => true
 is_present.call("1").success? # => true
 
 is_present.call({}).success? # => false
 is_present.call([]).success? # => false
+is_present.call(Set.new()).success? # => false
 is_present.call("").success? # => false
 ```
 
@@ -189,10 +199,12 @@ one_or_none = build { max_size?(1) }
 
 one_or_none.call({}).success? # => true
 one_or_none.call([1]).success? # => true
+one_or_none.call(Set.new([1])).success? # => true
 one_or_none.call("A").success? # => true
 
 one_or_none.call({"A" => :a, "B" => :b}).success? # => false
 one_or_none.call([1,2]).success? # => false
+one_or_none.call(Set.new([1,2])).success? # => false
 one_or_none.call("AB").success? # => false
 ```
 
@@ -316,6 +328,7 @@ is_hash = build { hash? }
 
 is_hash.call(Hash.new).success? # => true
 is_hash.call(Array.new).success? # => false
+is_hash.call(Set.new).success? # => false
 ```
 
 ### Array (`array?`)
@@ -327,6 +340,19 @@ is_array = build { array? }
 
 is_array.call(Array.new).success? # => true
 is_array.call(Hash.new).success? # => false
+is_array.call(Set.new).success? # => false
+```
+
+### Set (`set?`)
+
+> Returns true if the input is of type `Set`
+
+``` ruby
+is_set = build { set? }
+
+is_set.call(Array.new).success? # => false
+is_set.call(Hash.new).success? # => false
+is_set.call(Set.new).success? # => true
 ```
 
 ### String (`str?`)
@@ -467,11 +493,13 @@ is_empty.call(nil).success? # => true
 is_empty.call([]).success? # => true
 is_empty.call("").success? # => true
 is_empty.call({}).success? # => true
+is_empty.call(Set.new).success? # => true
 
 is_empty.call({key: :value}).success? # => false
 is_empty.call([:array]).success? # => false
 is_empty.call("string").success? # => false
 is_empty.call(:symbol).success? # => false
+is_empty.call(Set.new([1])).success? # => false
 ```
 
 ### Filled (`filled?`)
@@ -483,6 +511,7 @@ is_filled = build { filled? }
 
 is_filled.call({key: :value}).success? # => true
 is_filled.call([:array]).success? # => true
+is_filled.call(Set.new([:set])).success? # => true
 is_filled.call("string").success? # => true
 is_filled.call(:symbol).success? # => true
 
@@ -490,6 +519,7 @@ is_filled.call(nil).success? # => false
 is_filled.call([]).success? # => false
 is_filled.call("").success? # => false
 is_filled.call({}).success? # => false
+is_filled.call(Set.new).success? # => false
 ```
 
 ### Attribute (`attr?`, `respond_to?`)

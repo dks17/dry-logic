@@ -59,7 +59,7 @@ module Dry
 
         def empty?(input)
           case input
-          when String, Array, Hash then input.empty?
+          when String, Array, Hash, Set then input.empty?
           when nil then true
           else
             false
@@ -116,6 +116,10 @@ module Dry
           input.is_a?(Array)
         end
 
+        def set?(input)
+          input.is_a?(Set)
+        end
+
         def odd?(input)
           input.odd?
         end
@@ -143,7 +147,7 @@ module Dry
         def size?(size, input)
           case size
           when Integer then size.equal?(input.size)
-          when Range, Array then size.include?(input.size)
+          when Range, Array, Set then size.include?(input.size)
           else
             raise ArgumentError, "+#{size}+ is not supported type for size? predicate."
           end
@@ -160,7 +164,7 @@ module Dry
         def bytesize?(size, input)
           case size
           when Integer then size.equal?(input.bytesize)
-          when Range, Array then size.include?(input.bytesize)
+          when Range, Array, Set then size.include?(input.bytesize)
           else
             raise ArgumentError, "+#{size}+ is not supported type for bytesize? predicate."
           end

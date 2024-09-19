@@ -456,6 +456,30 @@ RSpec.describe "predicates" do
     end
   end
 
+  describe :set? do
+    let(:expression) { ->(*) { set? } }
+
+    describe "success" do
+      let(:output) { true }
+
+      describe Set do
+        it_behaves_like "predicate" do
+          let(:input) { described_class.new }
+        end
+      end
+    end
+
+    describe "failure" do
+      let(:output) { false }
+
+      describe Array do
+        it_behaves_like "predicate" do
+          let(:input) { described_class.new }
+        end
+      end
+    end
+  end
+
   describe :even? do
     let(:expression) { ->(*) { even? } }
 
@@ -728,6 +752,14 @@ RSpec.describe "predicates" do
           let(:input) { "AB" }
         end
       end
+
+      describe "Set" do
+        let(:expression) { ->(*) { bytesize?(Set.new([2, 3])) } }
+
+        it_behaves_like "predicate" do
+          let(:input) { "AB" }
+        end
+      end
     end
 
     describe "failure" do
@@ -751,6 +783,14 @@ RSpec.describe "predicates" do
 
       describe "Array" do
         let(:expression) { ->(*) { bytesize?([2, 3]) } }
+
+        it_behaves_like "predicate" do
+          let(:input) { "A" }
+        end
+      end
+
+      describe "Set" do
+        let(:expression) { ->(*) { bytesize?(Set.new([2, 3])) } }
 
         it_behaves_like "predicate" do
           let(:input) { "A" }

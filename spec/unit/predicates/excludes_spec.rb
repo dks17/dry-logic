@@ -14,7 +14,8 @@ RSpec.describe Dry::Logic::Predicates do
           [3, 1..2],
           ["foo", "Hello World"],
           [:foo, {bar: 0}],
-          [true, [nil, false]]
+          [true, [nil, false]],
+          [true, Set.new([nil, false])]
         ]
       end
 
@@ -48,7 +49,8 @@ RSpec.describe Dry::Logic::Predicates do
           ["World", "Hello World"],
           [:bar, {bar: 0}],
           [nil, [nil, false]],
-          [false, [nil, false]]
+          [false, [nil, false]],
+          [false, Set.new([nil, false])]
         ]
       end
 

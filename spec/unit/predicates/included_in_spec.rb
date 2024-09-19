@@ -14,7 +14,9 @@ RSpec.describe Dry::Logic::Predicates do
           [1..2, 1],
           [1..2, 2],
           [[nil, false], nil],
-          [[nil, false], false]
+          [[nil, false], false],
+          [Set.new([nil, false]), nil],
+          [Set.new([nil, false]), false]
         ]
       end
 
@@ -27,7 +29,8 @@ RSpec.describe Dry::Logic::Predicates do
           [%w[Jill John], "Jack"],
           [1..2, 0],
           [1..2, 3],
-          [[nil, false], true]
+          [[nil, false], true],
+          [Set.new([nil, false]), true]
         ]
       end
 

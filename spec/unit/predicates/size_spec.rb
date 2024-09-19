@@ -12,7 +12,8 @@ RSpec.describe Dry::Logic::Predicates do
           [[2, 4, 6], "abcd"],
           [4, "Jill"],
           [2, {1 => "st", 2 => "nd"}],
-          [1..8, "qwerty"]
+          [1..8, "qwerty"],
+          [Set.new([2, 4, 6]), "abcd"]
         ]
       end
 
@@ -25,7 +26,8 @@ RSpec.describe Dry::Logic::Predicates do
           [[1, 2], "abc"],
           [5, "Jill"],
           [3, {1 => "st", 2 => "nd"}],
-          [1..5, "qwerty"]
+          [1..5, "qwerty"],
+          [Set.new([1, 2]), "abc"]
         ]
       end
 
@@ -38,7 +40,8 @@ RSpec.describe Dry::Logic::Predicates do
           [[1, 2], 1],
           [3, "Jill"],
           [1, {1 => "st", 2 => "nd"}],
-          [1..5, "qwerty"]
+          [1..5, "qwerty"],
+          [Set.new([1, 2]), 1]
         ]
       end
 
